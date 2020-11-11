@@ -20,7 +20,7 @@ template title body = toResponse $
             H.title (toHtml title)
         H.body $ do
           body
-          
+
 
 --
 confi1 = ServerConfig { port      = 8000
@@ -33,7 +33,7 @@ confi1 = ServerConfig { port      = 8000
 
 receiveRemote :: ServerPart Response
 receiveRemote = setHeaderM "Access-Control-Allow-Origin" "*" *> do
-    method [GET, POST]
+    method POST
 
     (tmpFile, uploadName, contentType) <- lookFile "files"
     liftIO $ mapM_ (\x -> putStr (x ++ " ")) [tmpFile, uploadName, show contentType]
@@ -57,7 +57,7 @@ receiveRemote = setHeaderM "Access-Control-Allow-Origin" "*" *> do
 receiveText :: ServerPart Response
 receiveText = setHeaderM "Access-Control-Allow-Origin" "*" >> do
     --liftIO $ putStrLn "Receiving text..."
-    method [GET, POST]
+    method POST
 
     txt <- lookText "name"
     liftIO $ putStrLn . show $ txt
@@ -66,8 +66,17 @@ receiveText = setHeaderM "Access-Control-Allow-Origin" "*" >> do
 
 guardResponce :: ServerPart Response
 guardResponce = do
-    ok $ template "Somtething happened" $ do
-        p (toHtml $ ("or nothing?" :: Text))
+    method GET
+    serveDirectory DisableBrowsing ["main_page.html"] "Defender"
+            -- msum [ serveFile (asContentType "file") "pic"
+            --      , serveFile (asContentType "text/html") "scan_page.html"
+            --      , serveFile (asContentType "text/css") "scan_page.css"
+            --      , serveFile (guessContentTypeM mimeTypes) "main.js"
+            --      ]
+        -- resp = do
+        --     method GET
+        --     ok $ template "Somtething happened" $ do
+        --         H.h1 (toHtml $ ("or nothing?" :: Text))
 
 myApp :: ServerPart Response
 myApp = setHeaderM "Access-Control-Allow-Origin" "*" *> msum

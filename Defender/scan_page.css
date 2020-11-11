@@ -1,0 +1,37 @@
+body {
+ background-color: #4a4a60;
+}
+header {
+background: #3f3f64;
+  color: #d8d8d6; 
+  font-size: 12pt; 
+  font-family: Arial; 
+  font-weight: normal; 
+  height: 60;
+  margin-left: -8;
+  margin-right: -8;
+  margin-top: -8;
+  padding: 3;
+}
+img.logo {
+margin-top: 5;
+}
+article {
+  font-family: Arial;
+  color: #d8d8d6;
+}
+div.leaf {
+margin-top: 30;
+}
+nav.menu {
+margin-top: -18;
+}
+a.menu {
+color: #ef9e0a;
+text-decoration: none;
+}
+
+.container {
+border: 1px solid #d8d8d6;
+color: #d8d8d6;
+}

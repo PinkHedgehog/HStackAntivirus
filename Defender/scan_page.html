@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="./scan_page.css" />
+<link rel="stylesheet" type="text/css" href="./bootstrap.min.css" />
+
+    <title>Defender Code - Сканирование</title>
+</head>
+<body>
+<header>
+<div class="header">
+    <img class="logo" src="./pic/icon.png" alt="icon" width="90" align="left">
+    <img src="./pic/logo_name.png" alt="icon" width="200" align="botton">
+        <nav class="menu" align="right">
+           <a class="menu" href="main_page.html">На главную</a>
+        </nav>
+    </div>
+</header>
+<article>
+    <div class="leaf" align="center" id="tastysweet-1">
+         <img src="./pic/leaf.png" alt="icon" width="210" align="botton" id="tastysweet-2">
+        <p class="lead" id="my-security"><i>Ты в безопасности</i></p>
+    </div>
+    <div class="container" align="center">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal"> Файлы для сканирования </h4>
+                </div>
+                <div class="card-body">
+                    <div id="app" v-cloak @drop.prevent="addFile" @dragover.prevent>
+                        <h2><i>Загрузка файлов (перетащи их сюда)</i></h2>
+                        <div v-for="(file, key) in files" class="file-listing">
+                            <img class="preview" v-bind:ref="'preview' + parseInt(key)"/>
+
+                            <br>{{ file.name }}({{ file.size | kb }} kb)
+
+                            <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
+                            <form action="/upload" method="post">
+                                <input type="file" name="files" size="50" id="input-1" value="0">
+                            </form>
+                        </div>
+
+                        <button :disabled="uploadDisabled" @click="upload" class="btn btn-lg btn-primary">Загрузить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="main.js"></script>
+</body>
+<link rel="stylesheet" type="text/css" href="./scan_page.css" />
+</html>
