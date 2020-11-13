@@ -39,7 +39,7 @@ receiveRemote = setHeaderM "Access-Control-Allow-Origin" "*" *> do
     liftIO $ mapM_ (\x -> putStr (x ++ " ")) [tmpFile, uploadName, show contentType]
 
     (result, tp) <- liftIO $ do
-        t <- readProcess "../../yara-4.0.2/yara" ["-w", "../../YARA/rules/index.yar", tmpFile] ""
+        t <- readProcess "yara" ["-w", "../rules/index.yar", tmpFile] ""
         if t == "" then return ("Everything is OK", "ok") else return (t, "error")
 
     ok $ template "File uploaded" $ do
@@ -68,15 +68,6 @@ guardResponce :: ServerPart Response
 guardResponce = do
     method GET
     serveDirectory DisableBrowsing ["main_page.html"] "Defender"
-            -- msum [ serveFile (asContentType "file") "pic"
-            --      , serveFile (asContentType "text/html") "scan_page.html"
-            --      , serveFile (asContentType "text/css") "scan_page.css"
-            --      , serveFile (guessContentTypeM mimeTypes) "main.js"
-            --      ]
-        -- resp = do
-        --     method GET
-        --     ok $ template "Somtething happened" $ do
-        --         H.h1 (toHtml $ ("or nothing?" :: Text))
 
 myApp :: ServerPart Response
 myApp = setHeaderM "Access-Control-Allow-Origin" "*" *> msum
