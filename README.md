@@ -22,3 +22,9 @@ Online virus-checking service based on yara rules
 - $ ./index_gen.sh
 - $ yara index.yar \<some file\>
 - Comment error lines in index.yar
+
+## Documentation (in Russian)
+Click on the icon of file then select one or just attach it under the icon
+If you wish to receive email message with resul, tick corresponding checkbox and enter address.
+After that click on "Сканировать файл".
+To remove added file, click on 'X' button.
