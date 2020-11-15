@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="main_page.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <title>Defender Code</title>
+</head>
+<body>
+<header>
+ <div class="header">
+    <img  class="logo" src="./pic/icon.png" alt="icon" width="90" align="left" >
+    <img src="./pic/logo_name.png" alt="icon" width="200" align="botton">
+        <nav class="menu" align="right">
+            <!-- <a class="menu" href="scan_page.html">Сканирование</a>  | -->
+            <a class="menu" href="docs_page.html">Документация</a> |
+            <a class="menu" href="support_page.html">Поддержка</a>
+        </nav>
+    </div>
+</header>
+<article>
+    <div class="leaf" align="center" id="tastysweet-1">
+         <img src="./pic/leaf.png" alt="icon" width="170" align="top" id="tastysweet-2">
+        <p class="lead" id="my-security"><i>Ты в безопасности</i></p>
+    </div>
+    <div id="app">
+        <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 shadow-sm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                    <div id="file-checker" class="container-file" align="center">
+                        <img src="./pic/Fayl2.png" alt="" class="image-container" @click="selectFile(file)">
+                        <input id="file-input" type="file" ref="fileclick" name="kek" style="display: none;" />
+                        <div class="card-body" v-cloak @drop.prevent="addFile" @dragover.prevent>
+                            <br><i style="padding: 2px;">Кликни по картинке или перетащи файл сюда</i><br><br>
+                                <div v-for="(file, key) in files" class="file-listing">
+                                    <img class="preview image-preview" v-bind:ref="'preview' + parseInt(key)"/>
+                                    <br>{{ file.name }}({{ file.size | kb }} kb)
+                                    <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
+                                </div>
+                                <img id="scanfile" src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" hidden="true">
+                        </div>
+                    </div>
+                    <div class="" id="mail-div">
+                        <form class="" action="" method="post">
+                            <label for="mail-checkbox">Send checking results on e-mail</label>
+                            <input type="checkbox" id="mail-checkbox" value="false"><br>
+                            <input type="text" id="mail-string" value="hello@world.com" hidden="true">
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<script src="https://unpkg.com/vue"></script>
+<script type="text/javascript" src="main.js"></script>
+<script src="tarball.js"></script>
+</body>
+</html>
