@@ -1,2 +1,2 @@
 # HStackAntivirus
-Back-end for virus-checking service
+Online virus-checking service
