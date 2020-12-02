@@ -37,6 +37,7 @@ resolver: lts-16.20
 extra-deps:
 - happstack-lite-7.3.7
 - smtp-mail-0.3.0.0
+- happstack-server-tls-7.2.1
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #

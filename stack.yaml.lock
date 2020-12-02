@@ -11,6 +11,20 @@ packages:
       sha256: 56c2299b7c362a82d262e61a6fc6c7d7ad3e6e2f9ca24865da6fe6633f38b360
   original:
     hackage: happstack-lite-7.3.7
+- completed:
+    hackage: smtp-mail-0.3.0.0@sha256:2e6d9cb29d09a5a04d77a905eb1b570b94b5654e24d40630ea96aa374474c12f,1239
+    pantry-tree:
+      size: 450
+      sha256: 4d319cb6c22b35ca043a83210cd09bfbf99eec3dca4945cd53ed5b7c96f7daca
+  original:
+    hackage: smtp-mail-0.3.0.0
+- completed:
+    hackage: happstack-server-tls-7.2.1@sha256:fee96b8548a10cc03e2eefe984fa810a32673fcc08e2263cac14fbd0a708e500,1962
+    pantry-tree:
+      size: 455
+      sha256: 5f01df22f9457a69517caebbce070ba2f979f4b9b333b04a6bbb726790579e48
+  original:
+    hackage: happstack-server-tls-7.2.1
 snapshots:
 - completed:
     size: 532177

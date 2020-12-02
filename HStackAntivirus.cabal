@@ -39,7 +39,9 @@ library
         text,
         directory == 1.3.6.0,
         process,
-        smtp-mail == 0.3.0.0
+        smtp-mail == 0.3.0.0,
+        happstack-server,
+        happstack-server-tls >= 7.2
     default-language: Haskell2010
 
 executable HStackAntivirus-exe
@@ -56,7 +58,10 @@ executable HStackAntivirus-exe
         happstack-lite,
         text,
         directory == 1.3.6.0,
-        process
+        process,
+        smtp-mail >= 0.3.0.0,
+        happstack-server,
+        happstack-server-tls >= 7.2
     default-language: Haskell2010
 
 test-suite HStackAntivirus-test

@@ -17,6 +17,14 @@ cabal.sandbox.config
 *.hp
 *.eventlog
 .stack-work/
+.NewDefender/
+*.conf
+*.txt
+*.key
+*.crt
+*.srl
+*.csr
+*.out
 cabal.project.local
 cabal.project.local~
 .HTF/
