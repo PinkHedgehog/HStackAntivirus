@@ -1,31 +1,100 @@
 body {
- background-color: #4a4a60;
+    background-color: #4a4a60;
+    font-family: Arial;
+    margin: 0;
 }
 article {
   font-family: Arial;
   color: #d8d8d6;
 }
+
 header {
 background: #3f3f64;
   color: #d8d8d6;
   font-size: 12pt;
   font-family: Arial;
   font-weight: normal;
-  height: 60;
+  height: 95;
   margin-left: -8;
   margin-right: -8;
   margin-top: -8;
   padding: 3;
+
+ 
+}
+*{
+    box-sizing: border-box;
+} 
+/* Column container */
+.row {  
+    display: flex;
+    flex-wrap: nowrap;
+height: 100%;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 5%;
+    background-color: #3f3f63;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #d8d8d6;
+    font-size: 13pt;
+    font-family: Arial;
+    font-weight: normal;
+}
+
+/* Main column */
+.main {   
+    flex: 95%;
+    flex-wrap: nowrap;
+    padding: 20px;
+}
+
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+    .row {   
+        flex-direction: column;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width:100%;
+    }
+}
+
+
+/*Вертикальное меню*/
+a.vertikalmenu {
+    color: #ef9e0a;  
+    text-decoration: none;
+    margin-top: 60;
+    margin-left: 5;
+  
+
 }
 img.logo {
-margin-top: 5;
+margin-top: 15;
 }
-nav.menu {
-margin-top: -18;
+
+.docheader{
+margin-top: 30;
+margin-left: 150;
+font-size: 15pt;
 }
+
+
+
 nav.docs {
-margin-top: 5;
-margin-left: 12;
+margin-top: 15;
+margin-left: 150;
+font-size: 13pt;
 }
 a {
 color: #ef9e0a;
