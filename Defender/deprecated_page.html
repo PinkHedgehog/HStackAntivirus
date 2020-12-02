@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="main_page.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="dropzone.css">
+    <title>Defender Code</title>
+</head>
+<body>
+<header>
+ <div class="header">
+    <img  class="logo" src="./pic/icon.png" alt="icon" width="90" align="left" >
+    <img src="./pic/logo_name.png" alt="icon" width="200" align="botton">
+        <nav class="menu" align="right">
+            <!-- <a class="menu" href="scan_page.html">Сканирование</a>  | -->
+            <a class="menu" href="docs_page.html">Документация</a> |
+            <a class="menu" href="support_page.html">Поддержка</a>
+        </nav>
+    </div>
+</header>
+<article>
+    <div class="leaf" align="center" id="tastysweet-1">
+         <img src="./pic/leaf.png" alt="icon" width="170" align="top" id="tastysweet-2">
+        <p class="lead" id="my-security"><i>Ты в безопасности</i></p>
+    </div>
+    <div id="app">
+        <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 shadow-sm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+                    <!-- <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">
+
+                        </h4>
+
+                    </div> -->
+                    <!-- <img src="./pic/skanirfayl.png" class="card-img-top" style="width: 36pt; height: 64pt;" > action="http://localhost:8000/files"-->
+                    <div id="folder-checker" class="container-file" align="center">
+                        <img src="./pic/Papka.png" alt="" class="image-container" @click="selectFolder(folder)">
+                        <input id="folder-input" type="file" ref="fileclick-2" name="kek2" style="display: none;" />
+                        <div class="card-body" v-cloak @drop.prevent="addFolder" @dragover.prevent>
+                                <i>Кликни по картинке или перетащи папку сюда</i><br>
+                                <div v-for="(folder, key) in folders" class="file-listing">
+
+                                    <br>{{ folder.name }}({{ folder.size | kb }} kb)
+                                    <button @click="removeFolder(file)" title="Remove" id="remove-button-2">X</button>
+                                </div>
+                                <img src="./pic/skanirpapku.png" class="image-load" :disabled="uploadDisabled" @click="upload2">
+                        </div>
+                    </div>
+                    <div id="file-checker" class="container-file" align="center">
+                        <img src="./pic/Fayl.png" alt="" class="image-container" @click="selectFile(file)">
+
+                         <!-- <img src="removebutton.png" alt="Click me to remove the file." data-dz-remove /> -->
+                         <div class="card-body" v-cloak @drop.prevent="addFile" @dragover.prevent>
+                             <!-- <div id="my-dropzone"> -->
+                                 <form action="localhost:8000/files" class="dropzone" method="post" enctype="multipart/form-data" id="my-awesome-dropzone">
+                                </form>
+                             <!-- </div> -->
+                                <i>Кликни по картинке или перетащи файл сюда</i><br>
+                                <!-- <div v-for="(file, key) in files" class="file-listing">
+                                    <img class="preview image-preview" v-bind:ref="'preview' + parseInt(key)"/>
+                                    <br>{{ file.name }}({{ file.size | kb }} kb)
+                                    <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
+                                </div> -->
+                                <img src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" onclick="upload" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- <script src="https://unpkg.com/vue"></script> -->
+<script type="text/javascript" src="dropzone.js"></script>
+<script type="text/javascript" src="scan.js"></script>
+<script src="tarball.js"></script>
+</body>
+</html>
