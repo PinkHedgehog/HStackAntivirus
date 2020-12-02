@@ -3,7 +3,7 @@ Online virus-checking service based on yara rules
 
 ## Installation
 1. Install haskell-stack via your package manager
-2. Unpack my-rules.tar and my-yara.tar to parent directory
+2. Unpack rules.tar and yara.tar to parent directory
 4. Check if URL in fetch function from main.js is valid
 5. $ stack run
 5. Open URL in browser
