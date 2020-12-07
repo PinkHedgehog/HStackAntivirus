@@ -1,111 +1,100 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="main_page.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <title>Defender Code</title>
 </head>
+
 <body>
-<header>
-  <div class="header">
-    <img  class="logo" src="./pic/icon.png" alt="icon" width="120" align="left" style="padding-top:13; padding-left:4" >
-    <img src="./pic/logo_name.png" alt="icon" width="220" align="botton" style="padding-top:15">
-    
-  <!--  <nav class="menu" align="right">
-             <a class="menu" href="scan_page.html">Сканирование</a>  | 
-             
-            <a class="menu" href="support_page.html">Поддержка</a>
-        </nav> -->
-
-  </div>
-
-</header>
-<article>
-
-<div class="row">
-  <div class="side">  
-    <!--Изображение 1-->
-    <a class="vertikalmenu" href="docs_page.html">
-      <center><img src="./pic/documentation.png"
-      alt="documentation" 
-      width="90" 
-      class="image-container"
-      style="padding-left: 15; padding-top: 60;">
-      <div style="padding-top:5">Документация</div></center>
-    </a>
+    <header>
+        <div class="header">
+            <img class="logo" src="./pic/icon.png" alt="icon" width="120" align="left" style="padding-top:13; padding-left:4">
+            <img src="./pic/logo_name.png" alt="icon" width="220" align="botton" style="padding-top:15">
 
 
-    <!--Изображение 2-->
-    <a class="vertikalmenu" href="support_page.html">
-      <center><img src="./pic/support.png" 
-      alt="support" 
-      width="90"   
-      class="image-container"
-      style="padding-left: 15; padding-top: 60;">
-      <div style="padding-top:5; padding-bottom: 5px;">Поддержка</div></center>
-    </a>
-  </div> <!--Конец класса side-->
+        </div>
 
-  <div class="main">
-        
-            <!--Листок сканирования-->
-    <div class="leaf" align="center" id="tastysweet-1">
-      <img src="./pic/leaf.png" alt="icon" width="190" align="top" id="tastysweet-2">
-      <p class="lead" id="my-security"><i>Ты в безопасности</i></p>
-    </div><!--Конец листка сканирования-->
+    </header>
+    <article>
 
-            <!--Сканирование?-->
-    <div id="app">
-      <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-        
-        <!--Card md-3 начало-->
-        <div class="card-deck mb-3 text-center">
+        <div class="row">
+            <div class="side">
+                <a class="vertikalmenu" href="docs_page.html">
+                    <center><img src="./pic/documentation.png" alt="documentation" width="90" class="image-container" style="padding-left: 15; padding-top: 60;">
+                        <div style="padding-top:5">Документация</div>
+                    </center>
+                </a>
 
-          <!--Card md-4 начало--> 
-          <div class="card mb-4 shadow-sm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                <a class="vertikalmenu" href="support_page.html">
+                    <center><img src="./pic/support.png" alt="support" width="90" class="image-container" style="padding-left: 15; padding-top: 60;">
+                        <div style="padding-top:5; padding-bottom: 5px;">Поддержка</div>
+                    </center>
+                </a>
+            </div>
+            
+            <div class="main">
 
-            <!--Контейнер сканирования-->
-            <div id="file-checker" class="container-file" align="center" v-cloak @drop.prevent="addFile" @dragover.prevent>  <img src="./pic/file(1).png" 
-                       width="150" alt="" style="padding-top:15"
-                       class="image-container" @click="selectFile(file)">
-              <input id="file-input" type="file" ref="fileclick" name="kek" style="display: none;" />
-                                
+                <div class="leaf" align="center" id="tastysweet-1">
+                    <img src="./pic/leaf.png" alt="icon" width="190" align="top" id="tastysweet-2">
+                    <p class="lead" id="my-security"><i>Ты в безопасности</i></p>
+                </div>
 
-              <!--Сканирование-->
-              <div class="card-body" >
-                <br><i style="padding: 2px;">Кликни по картинке или перетащи файл сюда</i><br><br>
-                                
-                <!--Для удаления файла?-->
-                <div v-for="(file, key) in files" class="file-listing" style="padding: 4px">
-                  <img class="preview image-preview" v-bind:ref="'preview' + parseInt(key)"/>
-                                      <br>{{ file.name }} <br>({{ file.size | kb }} kb)
-                  <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
-                </div> <!--Для удаления файла? конец-->
-        
-                                <img id="scanfile" src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" hidden="true">
-              </div><!--Сканирование конец-->
-            </div> <!--Контейнер сканирования конец-->
-                   
-            <!-- Почта-->
-            <div class="" id="mail-div">
-              <form class="" action="" method="post">
-                <label for="mail-checkbox">Отправить результат на почту?</label>
-                <input type="checkbox" id="mail-checkbox" value="false"><br>
-                <input type="text" id="mail-string" placeholder="hello@world.com" hidden="true">
-              </form>
-            </div> <!--Конец почты-->
-          </div> <!--Card md-4 конец-->
-        </div><!--Card md-3 конец-->
-      </div><!--Сканирование конец-->
-    </div><!--Конец класса app-->
-  </div><!--Конец класса main-->
-</div><!--Конец класса row-->
+                <div id="app">
+                    <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+                        <div class="card-deck mb-3 text-center">
+
+                            <div class="card mb-4 shadow-sm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+                                <div id="file-checker" class="container-file" align="center" v-cloak @drop.prevent="addFile" @dragover.prevent> <img src="./pic/file(1).png" width="150" alt="" style="padding-top:15" class="image-container" @click="selectFile(file)">
+                                    <input id="file-input" type="file" ref="fileclick" name="kek" style="display: none;" />
+
+                                    <div class="card-body">
+                                        <br><i style="padding: 2px;">Кликни по картинке или перетащи файл сюда</i>
+                                        <br>
+                                        <br>
+
+                                        <div v-for="(file, key) in files" class="file-listing" style="padding: 4px">
+                                            <img class="preview image-preview" v-bind:ref="'preview' + parseInt(key)" />
+                                            <br>{{ file.name }}
+                                            <br>({{ file.size | kb }} kb)
+                                            <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
+                                        </div>
+
+                                        <img id="scanfile" src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" hidden="true">
+                                    </div>
+
+                                </div>
+
+                                <div class="" id="mail-div">
+                                    <form class="" action="" method="post">
+                                        <label for="mail-checkbox">Отправить результат на почту?</label>
+                                        <input type="checkbox" id="mail-checkbox" value="false">
+                                        <br>
+                                        <input type="text" id="mail-string" placeholder="hello@world.com" hidden="true">
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
-</article>
-<script src="https://unpkg.com/vue"></script>
-<script type="text/javascript" src="main.js"></script>
+    </article>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
+
 </html>

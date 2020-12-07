@@ -70,15 +70,16 @@ const app = new Vue({
 
 
         fileInput.addEventListener('change', function() {
-            var file = fileInput.files[0];
             if (this.files.length == 0) {
+                var file = fileInput.files[0];
                 this.files.push(file);
+                this.hashFile()
                 this.number = 1;
+                fileInput.value = null;
                 this.getImagePreviews();
+            } else {
+                return;
             }
-
-            //var reader = new FileReader();
-            //reader.readAsDataURL(file);
 
         }.bind(this), false);//.bind(this);
 
@@ -87,6 +88,23 @@ const app = new Vue({
         scanfile.hidden = false;
         //this.files.push(f);
 
+    },
+    showAlert(message, className) {
+        const div = document.createElement('div')
+        div.className = `alert alert-${className}`
+        div.appendChild(document.createTextNode(message))
+        const container = document.getElementById('tastysweet-1')
+        console.log('container: ' + container)
+        const form = document.getElementById('tastysweet-2')
+        console.log('form: ' + form)
+        container.insertBefore(div, form)
+        setTimeout(() => {
+            if (document.querySelector('.alert') != null) {
+                document.querySelector('.alert').remove()
+            }
+            img = document.getElementById('tastysweet-2')
+            img.src = './pic/leaf.png'
+        }, 15000)
     },
 
     getImagePreviews() {
@@ -108,6 +126,17 @@ const app = new Vue({
       }
     },
 
+    hashFile() {
+        if (this.files.length < 1) return;
+        const filename = this.files[0].name
+        const showHash = (hash) => this.showAlert(filename + ' SHA256: ' + hash, 'info')
+        var reader = new FileReader();
+        reader.onload = function( e ){
+            var hash = CryptoJS.SHA256(e.target.result).toString();
+            showHash(hash)
+        }
+        reader.readAsBinaryString(this.files[0]);
+    }, //.bind(this)
 
     addFile(e) {
       while (document.querySelector('.alert')) {
@@ -121,18 +150,17 @@ const app = new Vue({
       my_sec.textContent = 'Сейчас всё проверим!'
 
       let droppedFiles = e.dataTransfer.files;
-      // if(!droppedFiles) {
-      //     const ordinary_input = document.getElementById('input-1')
-      //     if
-      // }
+
       console.log(([...droppedFiles]).length);
       ([...droppedFiles]).forEach(f => {
         this.files.push(f);
+        this.hashFile()
         this.number++;
         this.getImagePreviews();
       });
       scanfile = document.getElementById('scanfile');
       scanfile.hidden = false;
+
     },
     removeFile(file){
       while (document.querySelector('.alert')) {
@@ -146,36 +174,19 @@ const app = new Vue({
       const my_sec = document.getElementById('my-security')
       my_sec.textContent = 'Ты в безопасности!'
       if (this.number > 0) {
-          this.files = this.files.filter(f => {
-            this.number--;
-            return f != file;
-          });
+          this.files = []
+          this.number--;
       }
     },
 
 
     upload() {
-	if (al = document.querySelector('.alert')) al.remove();
-        const showAlert = (message, className) => {
-            const div = document.createElement('div')
-            div.className = `alert alert-${className}`
-            div.appendChild(document.createTextNode(message))
-            const container = document.getElementById('tastysweet-1')
-            console.log('container: ' + container)
-            const form = document.getElementById('tastysweet-2')
-            console.log('form: ' + form)
-            container.insertBefore(div, form)
-            setTimeout(() => {
-                if (document.querySelector('.alert') != null) {
-                    document.querySelector('.alert').remove()
-                }
-                img = document.getElementById('tastysweet-2')
-                img.src = './pic/leaf.png'
-            }, 15000)
-        }
+	    if (al = document.querySelector('.alert')) al.remove();
 
         if (this.files.length == 0) return;
-
+        for (k in Object.keys(this.files[0])) {
+            console.log('Key: ' + k)
+        }
         mail_cb = document.getElementById('mail-checkbox')
         if (mail_cb.checked) {
             mail_string = document.getElementById('mail-string')
@@ -183,10 +194,14 @@ const app = new Vue({
             mail_string.hidden = mail_cb.checked;
             mail_cb.checked = false;
             mail_string = '';
-	    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!emailPattern.test(this.mail)) { this.mail = ''; showAlert('Incorrect email', 'info'); return; }
+	        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(this.mail)) {
+                this.mail = '';
+                this.showAlert('Incorrect email', 'info');
+                return;
+            }
         } else {
-	    this.mail = '';
+	        this.mail = '';
         }
 
         let formData = new FormData();
@@ -197,13 +212,10 @@ const app = new Vue({
         console.log(this.mail)
         formData.append('mail', this.mail)
         console.log(formData)
+        const filename = this.files[0].name;
 
-/* АХТУНГ!
-После переноса бэка на постоянный хостинг надо будет заменить http://localhost:8000 на актуальный URL!
-*/
-      //fetch('http://46.101.136.70', {method:'POST', headers: {}, body: formData})
-      
-      fetch('https://46.101.136.70', {method:'POST', headers: {}, body: formData})
+      fetch('https://localhost:8443', {method:'POST', headers: {}, body: formData})
+      //fetch('https://46.101.136.70', {method:'POST', headers: {}, body: formData})
         .then(async res => {
           res.headers.forEach(console.log);
           const ts = document.getElementById('tastysweet')
@@ -238,13 +250,13 @@ const app = new Vue({
             img.src = './pic/leaf.png'
             const my_sec = document.getElementById('my-security')
             my_sec.textContent = 'Ты в безопасности!'
-            showAlert('Everything is OK!', 'success', this)
+            this.showAlert('Everything is OK!', 'success')
           } else {
             img = document.getElementById('tastysweet-2')
             img.src = './pic/listbezkaplikras.png'
             const my_sec = document.getElementById('my-security')
             my_sec.textContent = 'Безопасность под угрозой!'
-            showAlert('Danger found: ' + p_result.textContent, 'danger', this)
+            this.showAlert('Danger found: ' + p_result.textContent)
           }
 
           console.log('done uploading', res);
