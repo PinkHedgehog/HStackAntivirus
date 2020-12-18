@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1 id="hstackantivirus">HStackAntivirus</h1>
+
+        <p>Online virus-checking service based on yara rules</p>
+
+        <h2 id="usage">Usage</h2>
+
+        <p>If you see this, you have already opened DefenderCode. Enjoy!</p>
+
+        <p>Click on the icon of file then select one or just attach it under the icon
+        If you wish to receive email message with result, tick corresponding checkbox and enter address.
+        After that click "Сканировать файл".
+        To remove added file, click 'X' button.</p>
+
+        <p>Client part correctly opens in modern (2020 year and later) versions of browsers:</p>
+        <ul>
+            <li>Mozilla Firefox</li>
+            <li>Google Chrome</li>
+            <li>Safari</li>
+            <li>Opera</li>
+        </ul>
+
+        <h2 id="howtobuild">How to build</h2>
+
+        <p>Server runs on Debian-based Linux distro, but other distros are also possible.
+            Kernel version >= 4.18.
+            System requires at least 10 GB of free disk space, 1 GB of RAM and good Internet connection</p>
+
+        <h3 id="installation">Installation</h3>
+
+        <ol>
+        <li>Install haskell-stack via your package manager</li>
+
+        <li>Unpack rules.tar and yara.tar to parent directory</li>
+
+        <li>install yara</li>
+        <li>Add these files to project folder:
+            <ul>
+                <li>config.conf with login and password to your smtp mail service</li>
+                <li>cert.pem, privkey.pem и rootCA.crt - SSL credentials</li>
+            </ul>
+        </li>
+
+        <li>
+            <code class="console language-console">
+            $ stack run
+            </code>
+        </li>
+
+        <li>Open URL in browser</li>
+
+        <li>Enjoy!</li>
+        </ol>
+
+        <h3 id="yarainstallation">Yara installation</h3>
+
+        <ol>
+        <li>Install libraries (dev versions): jansson, libssl, openssl</li>
+
+        <li>Inside of yara folder run:</li>
+        </ol>
+
+        <pre><code class="console language-console">
+        $ ./bootstrap.sh
+        $ ./configure --enable-cuckoo --enable-dotnet --enable-magic --with-crypto
+        $ make
+        $ (sudo) make install
+        </code></pre>
+
+        <ol>
+        <li>Check $ yara --version</li>
+        </ol>
+
+        <h3 id="rulespreprocessing">Rules preprocessing</h3>
+
+        <pre><code class="console language-console">
+        $ ./index_gen.sh
+        $ yara -w index.yar \&lt;some file\&gt;
+        </code></pre>
+
+        <p>If there are error file links, comment them in index.yar</p>
+
+    </body>
+</html>

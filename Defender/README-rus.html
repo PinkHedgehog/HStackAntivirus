@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1 id="hstackantivirus">DefenderCode</h1>
+
+        <p>Онлайн-чекер вредоносного кода на базе анализатора сигнатур YARA</p>
+
+        <h2 id="usage">Инструкция по эксплуатации</h2>
+
+        <p>Если вы это видите, то вы уже открыли DefenderCode. Развлекайтесь!</p>
+
+        <p> Кликните на иконку файла на главной странице, приложите файл.
+            Если хотите получить результат на почту,
+            проставьте соответствующую галочку и введите электронный адрес.
+            Для удаления файла нажмите крестик напротив его имени.
+            Чтобы проверить файл, нажмите "Сканировать файл"</p>
+
+        <p>Клиентская часть нормально открывается в современных версиях (2020 года и позже) следующих браузеров:</p>
+        <ul>
+            <li>Mozilla Firefox</li>
+            <li>Google Chrome</li>
+            <li>Safari</li>
+            <li>Opera</li>
+        </ul>
+
+        <h2 id="howtobuild">Инструкция по сборке</h2>
+
+        <h3 id="installation">Установка</h3>
+        <p>Сервер работает на Debian-подобных дистрибутивах ОС Linux с версией ядра >= 4.18,
+            но по желанию можно адаптировать и для других дистрибутивов.
+            Для корректной работы нужно хотя бы 10 ГБ свободного места на диске, 2 ГБ ОЗУ и стабильное Интернет-соединение.
+            </p>
+        <p>Порядок действий</p>
+        <ol>
+        <li>Установить haskell-stack через пакетный менеджер</li>
+        <li>Сделать stack upgrade и добавить в PATH новую версию исполняемого файла</li>
+        <li>Распаковать rules.tar и yara.tar в родительскую директорию</li>
+
+        <li>Установить YARA</li>
+        <li>В папку проекта положить файлы:
+            <ul>
+                <li>config.conf с логином и паролем через пробел от почтового сервиса</li>
+                <li>cert.pem, privkey.pem и rootCA.crt - данные сертификатов SSL</li>
+            </ul>
+        </li>
+        <li>
+            <code class="console language-console">
+            $ stack run
+            </code>
+        </li>
+
+        <li>Открыть в браузере URL, по которому слушает сервер. Например,</li> <a href="#">http://localhost:80</a>
+
+        <li>Наслаждайтесь!</li>
+        </ol>
+
+        <h3 id="yarainstallation">Установить YARA</h3>
+
+        <ol>
+        <li>Установить библиотеки (dev): jansson, libssl, openssl</li>
+
+        <li>Внутри папки с исходниками YARA:</li>
+        </ol>
+
+        <pre><code class="console language-console">
+        $ ./bootstrap.sh
+        $ ./configure --enable-cuckoo --enable-dotnet --enable-magic --with-crypto
+        $ make
+        $ (sudo) make install
+        </code></pre>
+
+        <ol>
+        <li>Check $ yara --version</li>
+        </ol>
+
+        <h3 id="rulespreprocessing">Предобработка правил</h3>
+
+        <pre><code class="console language-console">
+        $ ./index_gen.sh
+        $ yara -w index.yar \&lt;some file\&gt;
+        </code></pre>
+
+        <p>Если есть какие-то ошибки в ссылках на файлы, то закомментируйте эти ссылки в index.yar</p>
+
+    </body>
+</html>
