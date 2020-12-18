@@ -41,7 +41,10 @@ library
         process,
         smtp-mail == 0.3.0.0,
         happstack-server,
-        happstack-server-tls >= 7.2
+        happstack-server-tls >= 7.2,
+        cryptonite == 0.27,
+        bytestring == 0.10.10.1,
+        hourglass == 0.2.12
     default-language: Haskell2010
 
 executable HStackAntivirus-exe
@@ -61,7 +64,10 @@ executable HStackAntivirus-exe
         process,
         smtp-mail >= 0.3.0.0,
         happstack-server,
-        happstack-server-tls >= 7.2
+        happstack-server-tls >= 7.2,
+        cryptonite == 0.27,
+        bytestring == 0.10.10.1,
+        memory == 0.15.0
     default-language: Haskell2010
 
 test-suite HStackAntivirus-test

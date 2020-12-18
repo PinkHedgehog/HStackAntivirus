@@ -90,6 +90,48 @@ a.vertikalmenu {
 }
 
 
+/*Размеры окна ввода*/
+.form-horizontal .form-group{
+    padding: 0 40px;
+    margin: 0 0 25px 0;
+    position: relative;
+   }
+   
+   /*Овальность поля ввода*/
+   .form-control{
+    background: #f0f0f0;
+    border: none;
+    border-radius: 20px;
+    box-shadow: none;
+    padding: 0 20px 0 45px;
+    height: 40px;
+    transition: all 0.3s ease 0s;
+   }
+   
+   
+   .form-horizontal .btn{
+    float: right;
+    font-size: 14px;
+    color: #d8d8d6;
+    background: #db9109;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+   }
+   @media only screen and (max-width: 479px){
+    .form-horizontal .form-group{
+       left: 45px;
+    padding: 0 25px;
+    }
+    
+    .form-horizontal .btn{
+    padding: 10px 20px;
+    }
+   }
+
+
 
 
 
@@ -132,6 +174,17 @@ margin-top: -18;
     color: #d8d8d6;
     margin: auto;
 }
+
+.container-mail {
+    border: 1px solid #d8d8d6;
+    border-radius: 4pt;
+    /*width: 184px; */
+    /* height: 280px; */
+    border-style: dashed;
+    color: #d8d8d6;
+    margin: auto;
+}
+
 .image_container {
     width: 183px;
     align: bottom;
@@ -144,7 +197,7 @@ margin-top: -18;
     margin: auto;
     padding: 2px;
     padding-bottom: 0;
-    border-radius: 4px;
+    border-radius: 6px;
     border-color: orange;
     border-style: groove;
 

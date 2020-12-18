@@ -29,10 +29,10 @@ type Adr = String
 
 configFile = "config.conf"
 logFile = "logger.txt"
-confi2 = nullConf { port = 8000 }
-confi1 = nullTLSConf { tlsPort = 8443
-                     , tlsCert = "server101.mycloud.crt"
-                     , tlsKey  =  "server101.mycloud.key"
+confi2 = nullConf { port = 80 }
+confi1 = nullTLSConf { tlsPort = 443
+                     , tlsCert = "cert.pem" --"server101.mycloud.crt"
+                     , tlsKey  =  "privkey.pem"--"server101.mycloud.key"
                      , tlsCA = Just "rootCA.crt"
                      }
 
@@ -170,6 +170,12 @@ guardResponse = do
     method GET
     serveDirectory DisableBrowsing ["main_page.html"] "Defender"
 
+certbot :: ServerPart Response
+certbot = do
+    http
+    method GET
+    dir ".well-known" $ dir "acme-challenge" $ dir "GkQHaKJArek3RruqOT68xs6vv6eqliDSAnLfDCJ3scc" $
+        serveFile (asContentType "text") ".well-known/acme-challenge/GkQHaKJArek3RruqOT68xs6vv6eqliDSAnLfDCJ3scc"
 
 myApp :: ServerPart Response
 myApp = do
@@ -177,4 +183,5 @@ myApp = do
     setHeaderM "Access-Control-Allow-Origin" "*" *> msum
         [ guardResponse
         , receiveFile
+        , certbot
         ]

@@ -73,7 +73,6 @@ const app = new Vue({
             if (this.files.length == 0) {
                 var file = fileInput.files[0];
                 this.files.push(file);
-                this.hashFile()
                 this.number = 1;
                 fileInput.value = null;
                 this.getImagePreviews();
@@ -86,6 +85,8 @@ const app = new Vue({
         fileInput.click();
         scanfile = document.getElementById('scanfile');
         scanfile.hidden = false;
+        const hashfile = document.getElementById('shHash');
+        hashfile.hidden = false;
         //this.files.push(f);
 
     },
@@ -154,12 +155,13 @@ const app = new Vue({
       console.log(([...droppedFiles]).length);
       ([...droppedFiles]).forEach(f => {
         this.files.push(f);
-        this.hashFile()
         this.number++;
         this.getImagePreviews();
       });
       scanfile = document.getElementById('scanfile');
       scanfile.hidden = false;
+      const hashfile = document.getElementById('shHash');
+      hashfile.hidden = false;
 
     },
     removeFile(file){
@@ -171,6 +173,8 @@ const app = new Vue({
       img.src = './pic/leaf.png';
       scanfile = document.getElementById('scanfile');
       scanfile.hidden = true;
+      hashfile = document.getElementById('shHash');
+      hashfile.hidden = true;
       const my_sec = document.getElementById('my-security')
       my_sec.textContent = 'Ты в безопасности!'
       if (this.number > 0) {
@@ -182,7 +186,7 @@ const app = new Vue({
 
     upload() {
 	    if (al = document.querySelector('.alert')) al.remove();
-
+        this.hashFile()
         if (this.files.length == 0) return;
         for (k in Object.keys(this.files[0])) {
             console.log('Key: ' + k)
@@ -214,8 +218,8 @@ const app = new Vue({
         console.log(formData)
         const filename = this.files[0].name;
 
-      fetch('https://localhost:8443', {method:'POST', headers: {}, body: formData})
-      //fetch('https://46.101.136.70', {method:'POST', headers: {}, body: formData})
+      //fetch('https://localhost:8443', {method:'POST', headers: {}, body: formData})
+      fetch('https://defendercode.xyz', {method:'POST', headers: {}, body: formData})
         .then(async res => {
           res.headers.forEach(console.log);
           const ts = document.getElementById('tastysweet')
@@ -256,7 +260,7 @@ const app = new Vue({
             img.src = './pic/listbezkaplikras.png'
             const my_sec = document.getElementById('my-security')
             my_sec.textContent = 'Безопасность под угрозой!'
-            this.showAlert('Danger found: ' + p_result.textContent)
+            this.showAlert('Danger found: ' + p_result.textContent, 'danger')
           }
 
           console.log('done uploading', res);

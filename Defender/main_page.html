@@ -44,41 +44,56 @@
                 </div>
 
                 <div id="app">
+
+                    
                     <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
 
                         <div class="card-deck mb-3 text-center">
 
                             <div class="card mb-4 shadow-sm" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
 
-                                <div id="file-checker" class="container-file" align="center" v-cloak @drop.prevent="addFile" @dragover.prevent> <img src="./pic/file(1).png" width="150" alt="" style="padding-top:15" class="image-container" @click="selectFile(file)">
+                                <div id="file-checker" class="container-file" align="center" v-cloak @drop.prevent="addFile" @dragover.prevent> 
+                                    <img src="./pic/file(1).png" width="150" alt="" style="padding-top:15" class="image-container" @click="selectFile(file)">
                                     <input id="file-input" type="file" ref="fileclick" name="kek" style="display: none;" />
 
                                     <div class="card-body">
                                         <br><i style="padding: 2px;">Кликни по картинке или перетащи файл сюда</i>
-                                        <br>
-                                        <br>
-
+                                        <img id="scanfile" src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" hidden="true">
                                         <div v-for="(file, key) in files" class="file-listing" style="padding: 4px">
                                             <img class="preview image-preview" v-bind:ref="'preview' + parseInt(key)" />
                                             <br>{{ file.name }}
                                             <br>({{ file.size | kb }} kb)
-                                            <button @click="removeFile(file)" title="Remove" id="remove-button-1">X</button>
+                                            <button @click="removeFile(file)" title="Remove" id="remove-button-1">x</button>
+                                            <br> 
+                                            <!--img id="shHash"
+                                                src="./pic/showHash.png"
+                                                class="image-load"
+                                                @click="hashFile"
+                                                :disabled="uploadDisabled"
+                                                hidden="true"--!>                      
+                                            <br>                                        
+                                         
                                         </div>
-
-                                        <img id="scanfile" src="./pic/skanirfayl.png" class="image-load" :disabled="uploadDisabled" @click="upload" hidden="true">
-                                    </div>
-
+                                        <img id="shHash" src="./pic/showHash.png" class="image-load" @click="hashFile" :disabled="uploadDisabled" hidden="true">
+                                    </div> 
                                 </div>
-
+                                
+                                <div class="container-mail">
                                 <div class="" id="mail-div">
                                     <form class="" action="" method="post">
-                                        <label for="mail-checkbox">Отправить результат на почту?</label>
-                                        <input type="checkbox" id="mail-checkbox" value="false">
+                                        <center> <label for="mail-checkbox">Отправить результат на почту?</label>
+                                        <input type="checkbox"  id="mail-checkbox" value="false"></center>
                                         <br>
-                                        <input type="text" id="mail-string" placeholder="hello@world.com" hidden="true">
+                                        <input class="form-control" type="text"  id="mail-string" placeholder="hello@world.com" hidden="true">
                                     </form>
                                 </div>
+                                </div>
+                            
 
+
+
+
+                                
                             </div>
 
                         </div>
@@ -94,6 +109,8 @@
 
     </article>
     <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js
+"></script>
     <script type="text/javascript" src="main.js"></script>
 </body>
 
