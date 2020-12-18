@@ -1,7 +1,17 @@
 # HStackAntivirus
 Online virus-checking service based on yara rules
 
-## Installation
+## Usage
+If you see this, you have already opened DefenderCode. Enjoy!
+
+Click on the icon of file then select one or just attach it under the icon
+If you wish to receive email message with result, tick corresponding checkbox and enter address.
+After that click "Сканировать файл".
+To remove added file, click 'X' button.
+
+## How to build
+
+### Installation
 1. Install haskell-stack via your package manager
 2. Unpack rules.tar and yara.tar to parent directory
 3. install yara
@@ -10,22 +20,20 @@ Online virus-checking service based on yara rules
 5. Open URL in browser
 7. Enjoy!
 
-## Yara installation
+### Yara installation
 1. Install libraries (dev versions): jansson, libssl, openssl
 2. Inside of yara folder run:
-* $ ./bootstrap.sh
-* $ ./configure --enable-cuckoo --enable-dotnet --enable-magic --with-crypto
-* $ make
-* $ (sudo) make install
+```console
+$ ./bootstrap.sh
+$ ./configure --enable-cuckoo --enable-dotnet --enable-magic --with-crypto
+$ make
+$ (sudo) make install
+```
 3. Check $ yara --version
 
-## Rules preprocessing
-- $ ./index_gen.sh
-- $ yara index.yar \<some file\>
-- Comment error lines in index.yar
-
-## Documentation
-Click on the icon of file then select one or just attach it under the icon
-If you wish to receive email message with result, tick corresponding checkbox and enter address.
-After that click "Сканировать файл".
-To remove added file, click 'X' button.
+### Rules preprocessing
+```console
+$ ./index_gen.sh
+$ yara -w index.yar \<some file\>
+```
+If there are error file links, comment them in index.yar
