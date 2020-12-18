@@ -12,7 +12,7 @@ To remove added file, click 'X' button.
 ## How to build
 Server runs on Debian-based Linux distro, but other distros are also possible.
 Kernel version >= 4.18.
-System requires at least 10 GB of free disk space, 1 GB of RAM and good Internet connection.
+System requires at least 10 GB of free disk space, 2 GB of RAM and good Internet connection.
 
 ### Installation
 1. Install haskell-stack via your package manager
