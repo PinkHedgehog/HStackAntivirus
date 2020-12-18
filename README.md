@@ -10,14 +10,19 @@ After that click "Сканировать файл".
 To remove added file, click 'X' button.
 
 ## How to build
+Server runs on Debian-based Linux distro, but other distros are also possible.
+Kernel version >= 4.18.
+System requires at least 10 GB of free disk space, 1 GB of RAM and good Internet connection.
 
 ### Installation
 1. Install haskell-stack via your package manager
 2. Unpack rules.tar and yara.tar to parent directory
 3. install yara
-4. Check if URL in fetch function from main.js is valid
+4. Add these files to project folder:
+    * config.conf with login and password to your smtp mail service
+    * cert.pem, privkey.pem, and rootCA.crt - SSL credentials
 5. $ stack run
-5. Open URL in browser
+6. Open URL in browser
 7. Enjoy!
 
 ### Yara installation
